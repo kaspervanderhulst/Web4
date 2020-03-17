@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.PersonService;
 
-@WebServlet("/Controller")
+@WebServlet(value = "/Controller", asyncSupported = true)
 public class Controller extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class Controller extends HttpServlet {
         if (action != null) {
             RequestHandler handler;
             try {
-                controllerFactory.getController(action, model).handleRequest(request, response);
+                controllerFactory.getSyncController(action, model).handleRequest(request, response);
             } catch (NotAuthorizedException exc) {
                 List<String> errors = new ArrayList<String>();
                 errors.add(exc.getMessage());
@@ -52,5 +52,21 @@ public class Controller extends HttpServlet {
         RequestDispatcher view = request.getRequestDispatcher(destination);
         view.forward(request, response);
     }
+
+//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+//        String action = request.getParameter("action");
+//        String destination = "index.jsp";
+//
+//        if(action != null){
+//            AsyncHandler asyncHandler;
+//            SyncHandler syncHandler;
+//
+//            if(controllerFactory.getAsyncController(action,model).getClass().getSuperclass().equals(asyncHandler)){
+//
+//            }
+//
+//        }
+//
+//    }
 
 }

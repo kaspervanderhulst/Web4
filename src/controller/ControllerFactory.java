@@ -1,19 +1,35 @@
 package controller;
 
+import domain.Person;
 import domain.PersonService;
 
 public class ControllerFactory {
 	
-    public RequestHandler getController(String key, PersonService model) {
-        return createHandler(key, model);
+    public SyncHandler getSyncController(String key, PersonService model) {
+        return createSyncHandler(key, model);
     }
-    
-	private RequestHandler createHandler(String handlerName, PersonService model) {
-		RequestHandler handler = null;
+
+    public AsyncHandler getAsyncController(String key, PersonService model){ return createAsyncHandler(key, model); }
+
+    private AsyncHandler createAsyncHandler(String handlerName,PersonService model){
+    	AsyncHandler handler = null;
+    	try{
+    		Class<?> handlerClass = Class.forName("controller."+ handlerName);
+    		Object handlerObject = handlerClass.newInstance();
+    		handler = (AsyncHandler) handlerObject;
+    		handler.setModel(model);
+		}catch (Exception e){
+    		throw new RuntimeException("Deze pagina bestaat niet!!!!!");
+		}
+    	return handler;
+	}
+
+	private SyncHandler createSyncHandler(String handlerName, PersonService model) {
+		SyncHandler handler = null;
 		try {
 			Class<?> handlerClass = Class.forName("controller."+ handlerName);
 			Object handlerObject = handlerClass.newInstance();
-			handler = (RequestHandler) handlerObject;
+			handler = (SyncHandler) handlerObject;
 	    	handler.setModel(model);
 		} catch (Exception e) {
 			throw new RuntimeException("Deze pagina bestaat niet!!!!");
