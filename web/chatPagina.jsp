@@ -17,12 +17,31 @@
 </jsp:include>
 <main>
     <section>
-        <h4>Status: </h4><div id="status"></div>
+        <h4>Status: </h4>
+        <div id="status"><p id="pStatus"></p></div>
     </section>
     <section>
         <h4>Change status</h4>
-        <p><input type="text"><input type="button" value="changeStatus" onclick="changeStatus();"></p>
+        <p><input type="text" id="input"><input type="button" value="changeStatus" onclick="changeStatus();"></p>
     </section>
+
+    <section>
+        <table id="friends">
+            <tr>
+                <td>Nr.</td>
+                <td>Name</td>
+                <td>Status</td>
+            </tr>
+        </table>
+    </section>
+
+
+    <section>
+        <h4>Add friend</h4>
+        <p><input type="text" id="nameInput"><input type="button" value="Add friend" onclick="addFriend();"></p>
+    </section>
+
+
 </main>
 <jsp:include page="footer.jsp">
     <jsp:param name="title" value="Home"/>

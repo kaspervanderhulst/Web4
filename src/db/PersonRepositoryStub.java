@@ -16,6 +16,7 @@ public class PersonRepositoryStub implements PersonRepository {
 		add(administrator);
 		Person jan = new Person("jan@ucll.be", "t", "Jan", "Janssens", Role.LID);
 		add(jan);
+		jan.addFriends(administrator);
 		Person an = new Person("an@ucll.be", "t", "An", "Cornelissen", Role.LID);
 		add(an);
 	}
@@ -47,7 +48,7 @@ public class PersonRepositoryStub implements PersonRepository {
 		}
 		persons.put(person.getUserId(), person);
 	}
-	
+
 	public void delete(String personId){
 		if(personId == null){
 			throw new IllegalArgumentException("No id given");

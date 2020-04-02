@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import domain.Person;
 import domain.PersonService;
 
-public class LogIn extends SyncHandler {
+public class LogIn extends RequestHandler {
 
 	@Override
 	public void handleRequest(HttpServletRequest request,

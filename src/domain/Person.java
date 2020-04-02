@@ -5,7 +5,10 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +20,8 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private Role role;
+	private String status;
+	Set<Person> friends;
 
 	public Person(String userId, String password, String firstName,
 			String lastName,Role role) {
@@ -25,6 +30,8 @@ public class Person {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setRole(role);
+		setStatus("Offline");
+		setFriends(new HashSet<>());
 	}
 
 	public Person(String userId, String password, String salt,
@@ -47,7 +54,21 @@ public class Person {
 	public void setRole(Role role) {
 		this.role=role;
 	}
-	
+
+
+	public void setFriends(Set<Person> friends) {
+
+
+		this.friends = friends;
+	}
+
+	public  void addFriends(Person person){
+		friends.add(person);
+	}
+
+	public Set<Person> getFriends() {
+		return friends;
+	}
 
 	public void setUserId(String userId) {
 		if (userId.isEmpty()) {
@@ -76,6 +97,14 @@ public class Person {
 			throw new IllegalArgumentException("No password given");
 		}
 		return getPassword().equals(hashPassword(password, getSalt()));
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatus() {
+		return status;
 	}
 
 	public void setPassword(String password) {
