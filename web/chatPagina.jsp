@@ -18,7 +18,7 @@
 <main>
     <section>
         <h4>Status: </h4>
-        <div id="status"><p id="pStatus"></p></div>
+        <div id="status"><p id="pStatus">Online</p></div>
     </section>
     <section>
         <h4>Change status</h4>

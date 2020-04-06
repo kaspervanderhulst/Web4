@@ -21,7 +21,7 @@ public class Person {
 	private String lastName;
 	private Role role;
 	private String status;
-	Set<Person> friends;
+	List<Person> friends;
 
 	public Person(String userId, String password, String firstName,
 			String lastName,Role role) {
@@ -31,7 +31,7 @@ public class Person {
 		setLastName(lastName);
 		setRole(role);
 		setStatus("Offline");
-		setFriends(new HashSet<>());
+		setFriends(new ArrayList<>());
 	}
 
 	public Person(String userId, String password, String salt,
@@ -56,7 +56,7 @@ public class Person {
 	}
 
 
-	public void setFriends(Set<Person> friends) {
+	public void setFriends(List<Person> friends) {
 
 
 		this.friends = friends;
@@ -66,7 +66,7 @@ public class Person {
 		friends.add(person);
 	}
 
-	public Set<Person> getFriends() {
+	public List<Person> getFriends() {
 		return friends;
 	}
 

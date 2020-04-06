@@ -1,10 +1,14 @@
 let xhr = new XMLHttpRequest();
 var timeoutId;
+var webSocket = new WebSocket("ws://localhost:8080/comment");
 
+webSocket.onmessage = function (ev) {
+    writeResponse(ev.data);
+};
 
 //1. Setting a status
 function changeStatus() {
-     xhr.open("GET","Controller?action=SetStatus&status="+document.getElementById("input").value,true);
+     xhr.open("POST","Controller?action=SetStatus&status="+document.getElementById("input").value,true);
      xhr.onreadystatechange = setStatus;
      xhr.send(null);
 }
@@ -38,7 +42,7 @@ function getFriendlist() {
 }
 
 function showFriends() {
-
+console.log(xhr.status);
     if(xhr.status === 200){
         if(xhr.readyState === 4){
             clearTable();
@@ -52,7 +56,8 @@ function showFriends() {
                 var tdNr = document.createElement("td");
                 var chatButton = document.createElement("a");
                 tdName.innerText = text[person].name;
-                tdStatus.innerText = text[person].status;
+                console.log(text);
+                tdStatus.innerText = text[person].statusname;
                 tdNr.innerText = count;
                 chatButton.href = "Controller?action=GoToChat&friend="+text[person].name;
 
@@ -81,7 +86,23 @@ function clearTable(){
 
 function addFriend() {
     clearTimeout(timeoutId);
-    xhr.open("POST","Controller?action=AddFriend&name="+document.getElementById("nameInput").value);
+    xhr.open("POST","Controller?action=AddFriend&name="+document.getElementById("nameInput"));
+    xhr.onreadystatechange = getFriendlist;
     xhr.send(null);
-    getFriendlist();
 }
+
+//3. Adding comments to topics
+
+function writeResponse(text) {
+    console.log(text);
+
+    if(text === "Connection Established"){
+
+    }
+    var split = text.split("-");
+    console.log(split);
+   // document.getElementById("comments" + split[0].innerHTML += "<br/>" + split[1]);
+}
+
+
+//TODO make a form for adding friends you can use?
