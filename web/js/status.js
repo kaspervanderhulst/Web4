@@ -75,6 +75,7 @@ function showFriends() {
             timeoutId = setTimeout(getFriendlist,10000);
         }
     }
+
 }
 
 function clearTable(){
