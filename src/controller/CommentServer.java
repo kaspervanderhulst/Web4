@@ -28,7 +28,7 @@ public class CommentServer {
     }
 
     @OnClose
-    public void onClose(String message, javax.websocket.Session session){
+    public void onClose(javax.websocket.Session session){
         System.out.println("Chat " + session.getId() + " has ended");
         sessions.remove(session);
     }

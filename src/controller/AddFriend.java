@@ -13,7 +13,12 @@ public class AddFriend extends RequestHandler {
 
         Person p = (Person) request.getSession().getAttribute("user");
         if (p != null){
+          //  System.out.println("adding this person: " + getPersonService().getPerson(request.getParameter("name")));
+            //Adding the person to your own friendslist
             p.addFriends(getPersonService().getPerson(request.getParameter("name")));
+
+            //Adding yourself to this persons friendslist
+            getPersonService().getPerson(request.getParameter("name")).addFriends(p);
         }
     }
 }

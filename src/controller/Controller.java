@@ -37,6 +37,7 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request,
                                   HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+      //  System.out.println(action);
         String destination;
         if (action != null) {
 
