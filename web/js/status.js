@@ -70,7 +70,9 @@ function showFriends() {
                 table.appendChild(tr);
                 count++;
             }
-            timeoutId = setTimeout(getFriendlist,20000);
+
+            //Timer is set to 10 seconds
+            timeoutId = setTimeout(getFriendlist,10000);
         }
     }
 }
