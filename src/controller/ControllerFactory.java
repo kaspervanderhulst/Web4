@@ -1,6 +1,5 @@
 package controller;
 
-import domain.Person;
 import domain.PersonService;
 
 public class ControllerFactory {

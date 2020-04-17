@@ -19,7 +19,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.4" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.29" level="application_server_libraries" />
+    <orderEntry type="library" name="gson-2.6.2" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.7.0" level="project" />
+    <orderEntry type="library" name="jackson-core-2.7.4" level="project" />
+    <orderEntry type="library" name="jackson-databind-2.7.4" level="project" />
+    <orderEntry type="library" name="javax.websocket-api-1.1" level="project" />
     <orderEntry type="library" name="jstl-1.2" level="project" />
   </component>
 </module>

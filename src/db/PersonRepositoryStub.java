@@ -1,12 +1,12 @@
 package db;
 
+import domain.Person;
+import domain.Role;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import domain.Person;
-import domain.Role;
 
 public class PersonRepositoryStub implements PersonRepository {
 	private Map<String, Person> persons = new HashMap<String, Person>();
@@ -29,7 +29,7 @@ public class PersonRepositoryStub implements PersonRepository {
 	}
 	
 	public List<Person> getAll(){
-		return new ArrayList<Person>(persons.values());	
+		return new ArrayList<Person>(persons.values());
 	}
 
 	public void add(Person person){
