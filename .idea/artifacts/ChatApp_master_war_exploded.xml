@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ChatApp-master:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ChatApp_master_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ChatApp-master" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="jackson-annotations-2.7.0" />
+          <element id="library" level="project" name="jackson-core-2.7.4" />
+          <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="jackson-databind-2.7.4" />
+          <element id="library" level="project" name="gson-2.6.2" />
+          <element id="library" level="project" name="javax.websocket-api-1.1" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ChatApp-master/web/Web" />
+    </root>
+  </artifact>
+</component>
