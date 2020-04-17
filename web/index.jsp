@@ -52,7 +52,7 @@
         <form id="1">
             <h4>What do you think about this assignment?</h4>
             <div id="comments1"></div>
-            <label for="name1">Name:</label><input type="text" id="name1" required>
+            <label for="name1">Name:</label><input value="${user.getFirstName()}" type="text" id="name1" required>
             <label for="comment1">Comment:</label><input id="comment1" type="text" required>
             <label for="number1">Rating</label><input id="number1" type="number" min="0" max="10" required>
             <button type="submit">Add Comment</button>
@@ -61,7 +61,7 @@
         <form id="2">
             <h4>How is everything going during the lockdown?</h4>
             <div id="comments2"></div>
-            <label for="name2">Name:</label><input type="text" id="name2" required>
+            <label for="name2">Name:</label><input value="${user.getFirstName()}" type="text" id="name2" required>
             <label for="comment2">Comment:</label><input id="comment2" type="text" required>
             <label for="number2">Rating</label><input id="number2" type="number" min="0" max="10" required>
             <button type="submit">Add Comment</button>
@@ -70,7 +70,7 @@
         <form id="3">
             <h4>Have you finished all your assignments?</h4>
             <div id="comments3"></div>
-            <label for="name3">Name:</label><input type="text" id="name3" required>
+            <label for="name3">Name:</label><input  value="${user.getFirstName()}" type="text" id="name3" required>
             <label for="comment3">Comment:</label><input id="comment3" type="text" required>
             <label for="number3">Rating</label><input id="number3" type="number" min="0" max="10" required>
             <button type="submit">Add Comment</button>
@@ -79,7 +79,7 @@
         <form id="4">
             <h4>What is your favourite series?</h4>
             <div id="comments4"></div>
-            <label for="name4">Name:</label><input type="text" id="name4" required>
+            <label for="name4">Name:</label><input value="${user.getFirstName()}" type="text" id="name4" required>
             <label for="comment4">Comment:</label><input id="comment4" type="text" required>
             <label for="number4">Rating</label><input id="number4" type="number" min="0" max="10" required>
             <button type="submit">Add Comment</button>
@@ -88,7 +88,7 @@
         <form id="5">
             <h4>Do you have any ideas for topics?</h4>
             <div id="comments5"></div>
-            <label for="name5">Name:</label><input type="text" id="name5" required>
+            <label for="name5">Name:</label><input value="${user.getFirstName()}" type="text" id="name5" required>
             <label for="comment5">Comment:</label><input id="comment5" type="text" required>
             <label for="number5">Rating</label><input id="number5" type="number" min="0" max="10" required>
             <button type="submit">Add Comment</button>
