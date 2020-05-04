@@ -1,4 +1,5 @@
-let xhr = new XMLHttpRequest();
+let statusRequest = new XMLHttpRequest();
+let friendsListRequest = new XMLHttpRequest();
 var timeoutId;
 var webSocket = new WebSocket("ws://localhost:8080/comment");
 let commentRequest = new XMLHttpRequest();
@@ -8,16 +9,16 @@ webSocket.onmessage = function (ev) {
 
 //1. Setting a status
 function changeStatus() {
-    xhr.open("POST", "Controller?action=SetStatus&status=" + document.getElementById("input").value, true);
-    xhr.onreadystatechange = setStatus;
-    xhr.send(null);
+    statusRequest.open("POST", "Controller?action=SetStatus&status=" + document.getElementById("input").value, true);
+    statusRequest.onreadystatechange = setStatus;
+    statusRequest.send(null);
 }
 
 
 function setStatus() {
-    if (xhr.status == 200) {
-        if (xhr.readyState == 4) {
-            var serverResponse = JSON.parse(xhr.responseText);
+    if (statusRequest.status == 200) {
+        if (statusRequest.readyState == 4) {
+            var serverResponse = JSON.parse(statusRequest.responseText);
             var status = serverResponse.status;
             var div = document.getElementById("status");
             var p = document.getElementById("pStatus");
@@ -35,29 +36,25 @@ function setStatus() {
 getFriendlist();
 
 function getFriendlist() {
-    //  console.log("refresh");
-    xhr.open("GET", "Controller?action=GetFriends");
-
-    xhr.onreadystatechange = showFriends;
-    xhr.send(null);
+    friendsListRequest.open("GET", "Controller?action=GetFriends");
+    friendsListRequest.onreadystatechange = showFriends;
+    friendsListRequest.send(null);
 }
 
 function showFriends() {
-//console.log(xhr.status);
-    if (xhr.status === 200) {
-        if (xhr.readyState === 4) {
+    if (friendsListRequest.status === 200) {
+        if (friendsListRequest.readyState === 4) {
             clearTable();
-            var text = JSON.parse(xhr.responseText);
-            var table = document.getElementById("friends");
-            var count = 1;
-            for (var person in text) {
-                var tr = document.createElement("tr");
-                var tdName = document.createElement("td");
-                var tdStatus = document.createElement("td");
-                var tdNr = document.createElement("td");
-                var chatButton = document.createElement("a");
+            let text = JSON.parse(friendsListRequest.responseText);
+            let table = document.getElementById("friends");
+            let count = 1;
+            for (let person in text) {
+                let tr = document.createElement("tr");
+                let tdName = document.createElement("td");
+                let tdStatus = document.createElement("td");
+                let tdNr = document.createElement("td");
+                let chatButton = document.createElement("a");
                 tdName.innerText = text[person].name;
-                //  console.log(text);
                 tdStatus.innerText = text[person].statusname;
                 tdNr.innerText = count;
                 chatButton.href = "Controller?action=GoToChat&friend=" + text[person].name;
@@ -87,10 +84,9 @@ function clearTable() {
 
 function addFriend() {
     clearTimeout(timeoutId);
-    //console.log("adding friend...." + document.getElementById("nameInput").value)
-    xhr.open("POST", "Controller?action=AddFriend&name=" + document.getElementById("nameInput").value);
-    xhr.onreadystatechange = getFriendlist;
-    xhr.send(null);
+    friendsListRequest.open("POST", "Controller?action=AddFriend&name=" + document.getElementById("nameInput").value);
+    friendsListRequest.onreadystatechange = getFriendlist;
+    friendsListRequest.send(null);
 }
 
 //3. Adding comments to topics
@@ -127,7 +123,6 @@ for (let i = 0; i < forms.length; i++) {
 }
 
 function send(text){
-  //  console.log(text);
     webSocket.send(text);
 }
 

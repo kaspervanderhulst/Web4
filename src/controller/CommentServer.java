@@ -17,19 +17,16 @@ public class CommentServer {
 
     @OnOpen
     public void onOpen(javax.websocket.Session session){
-        System.out.println(session.getId() + " has opened a connection");
         sessions.add(session);
     }
 
     @OnMessage
     public void onMessage(String message, javax.websocket.Session session){
-        System.out.println("Message from " + session.getId() + ": " + message);
         sendMessageToAll(message);
     }
 
     @OnClose
     public void onClose(javax.websocket.Session session){
-        System.out.println("Chat " + session.getId() + " has ended");
         sessions.remove(session);
     }
 
