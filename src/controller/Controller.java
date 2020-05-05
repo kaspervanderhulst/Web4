@@ -1,5 +1,6 @@
 package controller;
 
+import domain.MessageService;
 import domain.PersonService;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,8 @@ public class Controller extends HttpServlet {
 
     private PersonService model = new PersonService();
     private ControllerFactory controllerFactory = new ControllerFactory();
+    private MessageService messageService = new MessageService();
+
 
     public Controller() {
         super();
@@ -40,7 +43,7 @@ public class Controller extends HttpServlet {
         if (action != null) {
 
             try {
-                controllerFactory.getController(action, model).handleRequest(request, response);
+                controllerFactory.getController(action, model, messageService).handleRequest(request, response);
             } catch (NotAuthorizedException exc) {
                 List<String> errors = new ArrayList<String>();
                 errors.add(exc.getMessage());
@@ -49,7 +52,7 @@ public class Controller extends HttpServlet {
                 RequestDispatcher view = request.getRequestDispatcher(destination);
             }
         }else {
-            controllerFactory.getController(action,model).handleRequest(request,response);
+            controllerFactory.getController(action,model, messageService).handleRequest(request,response);
             destination = "index.jsp";
             RequestDispatcher view = request.getRequestDispatcher(destination);
             view.forward(request,response);

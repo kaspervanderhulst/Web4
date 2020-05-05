@@ -1,8 +1,6 @@
 package controller;
 
-import domain.Person;
-import domain.PersonService;
-import domain.Role;
+import domain.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +10,7 @@ import java.io.IOException;
 public abstract class RequestHandler {
 
     private PersonService personService;
+    private MessageService messageService;
 
     public abstract void handleRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 
@@ -21,6 +20,9 @@ public abstract class RequestHandler {
 
     public PersonService getPersonService() {
         return personService;
+    }
+    public MessageService getMessageService(){
+        return messageService;
     }
 
     protected boolean isFromUserWithRole (HttpServletRequest request, Role role) {

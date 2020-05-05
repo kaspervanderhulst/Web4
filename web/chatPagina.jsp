@@ -11,6 +11,7 @@
     <jsp:param name="title" value="Home"/>
 </jsp:include>
 <script src="js/status.js"></script>
+<script src="js/jquery-3.5.0.min.js"></script>
 <body>
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Home"/>
@@ -40,6 +41,20 @@
         <h4>Add friend</h4>
         <p><input type="text" id="nameInput"><input type="button" value="Add friend" onclick="addFriend();"></p>
     </section>
+
+
+    <div class="chat-popup" id="chatdiv" style="border: 1px black">
+        <form id="chatform" method="post" class="form-container">
+            <h1>Chat</h1>
+            <div id="chatbox"></div>
+            <div id="chatRecipient"></div>
+            <label  for="msg"></label>
+            <textarea placeholder="Type message.." id="msg" name="msg" required></textarea>
+
+            <button id="chatsubmit" type="button" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
 
 
 </main>

@@ -1,14 +1,15 @@
 package controller;
 
+import domain.MessageService;
 import domain.PersonService;
 
 public class ControllerFactory {
 
-	public RequestHandler getController(String key, PersonService model){
-		return createHandler(key,model);
+	public RequestHandler getController(String key, PersonService model, MessageService messageService){
+		return createHandler(key,model, messageService);
 	}
 
-	private RequestHandler createHandler(String handlerName, PersonService model) {
+	private RequestHandler createHandler(String handlerName, PersonService model, MessageService messageService) {
 		RequestHandler handler = null;
 		try {
 			Class<?> handlerClass = Class.forName("controller."+ handlerName);

@@ -59,6 +59,9 @@ function showFriends() {
                 tdNr.innerText = count;
                 chatButton.href = "Controller?action=GoToChat&friend=" + text[person].name;
 
+
+
+
                 tr.appendChild(tdNr);
                 tr.appendChild(tdName);
                 tr.appendChild(tdStatus);
@@ -141,17 +144,10 @@ function writeResponse(text) {
     document.getElementById("comments" + split[0]).innerHTML += "<br/>" + split[1];
 
 }
+// ajax jquery
 
-
-
-
-
-
-
-
-
-
-
-
-
-//TODO make a form for adding friends you can use?
+function openChatWithFriend(username){
+    if(username != null){
+        $.get("Controller?action=GetMessages")
+    }
+}
