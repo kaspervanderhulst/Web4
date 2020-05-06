@@ -251,6 +251,7 @@ function openForm(count) {
 function getReceivedMessages() {
     let docu = document.getElementById("messages");
     let recip = ($("#recipient").html() + "@ucll.be").toLowerCase();
+    console.log(recip)
     docu.innerHTML = "";
     $.ajax({
         type: "GET",

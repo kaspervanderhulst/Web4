@@ -17,7 +17,8 @@ public class GetMessages extends RequestHandler {
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Person user = (Person) request.getSession().getAttribute("user");
-        Person recipient = (Person) request.getAttribute("recipient");
+        String recipientid =  request.getParameter("recipient");
+        Person recipient = getPersonService().getPerson(recipientid);
         String json = "";
         json = test(user, recipient);
 

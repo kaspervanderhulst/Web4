@@ -30,7 +30,7 @@ public class Message extends RequestHandler {
 //        JsonObject object = getMessageService().getMessages(person);
         response.setContentType("application/json");
         json = test(person, recipient);
-        System.out.println(json);
+        System.out.println(json + "in the messages");
         response.getWriter().write(json);
     }
 
