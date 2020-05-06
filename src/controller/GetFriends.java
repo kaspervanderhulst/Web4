@@ -25,7 +25,7 @@ public class GetFriends extends RequestHandler {
         JsonObject json = new JsonObject();
         for (Person u : list) {
             JsonObject user = new JsonObject();
-            user.addProperty("name", u.getLastName());
+            user.addProperty("name", u.getFirstName());
             user.addProperty("statusname", u.getStatus());
             json.add(u.getLastName(), user);
         }

@@ -14,8 +14,9 @@ public abstract class RequestHandler {
 
     public abstract void handleRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 
-    public void setModel (PersonService personService) {
+    public void setModel (PersonService personService, MessageService messageService) {
         this.personService = personService;
+        this.messageService = messageService;
     }
 
     public PersonService getPersonService() {

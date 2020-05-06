@@ -12,6 +12,8 @@
           <element id="library" level="project" name="jackson-core-2.7.4" />
           <element id="library" level="project" name="javax.websocket-api-1.1" />
           <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="jackson-core-2.11.0" />
+          <element id="library" level="project" name="jackson-databind-2.7.4" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="Web4/web/Web" />

@@ -11,13 +11,14 @@
     <jsp:param name="title" value="Home"/>
 </jsp:include>
 <script src="js/status.js"></script>
-<script src="js/jquery-3.5.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Home"/>
 </jsp:include>
 <main>
     <section>
+        <div id="currentuser" >${user.getFirstName()}</div>
         <h4>Status: </h4>
         <div id="status"><p id="pStatus">Online</p></div>
     </section>
@@ -43,20 +44,12 @@
     </section>
 
 
-    <div class="chat-popup" id="chatdiv" style="border: 1px black">
-        <form id="chatform" method="post" class="form-container">
-            <h1>Chat</h1>
-            <div id="chatbox"></div>
-            <div id="chatRecipient"></div>
-            <label  for="msg"></label>
-            <textarea placeholder="Type message.." id="msg" name="msg" required></textarea>
 
-            <button id="chatsubmit" type="button" class="btn">Send</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
+
+        <div id="chats">
+
+        </div>
     </div>
-
-
 </main>
 <jsp:include page="footer.jsp">
     <jsp:param name="title" value="Home"/>

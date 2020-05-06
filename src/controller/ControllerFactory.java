@@ -15,7 +15,8 @@ public class ControllerFactory {
 			Class<?> handlerClass = Class.forName("controller."+ handlerName);
 			Object handlerObject = handlerClass.newInstance();
 			handler = (RequestHandler) handlerObject;
-			handler.setModel(model);
+			handler.setModel(model, messageService);
+
 		} catch (Exception e) {
 			throw new RuntimeException("Deze pagina bestaat niet!!!!");
 		}
