@@ -71,13 +71,13 @@ public class MessageRepositoryStub implements MessageRepository {
         for (Message m : getAllMessages()) {
 
 
-            if (m.getRecipientId().equalsIgnoreCase(recipId) || m.getSenderId().equalsIgnoreCase(id)) {
-                if (m.getRecipientId().equalsIgnoreCase(id)) {
+
+                if (m.getRecipientId().equalsIgnoreCase(id) && m.getSenderId().equalsIgnoreCase(recipId)) {
                     result.add(m.getMessage() + "__--0");
-                } else if (m.getSenderId().equalsIgnoreCase(id)) {
+                } else if (m.getSenderId().equalsIgnoreCase(id) && m.getRecipientId().equalsIgnoreCase(recipId)) {
                     result.add(m.getMessage() + "__--1");
                 }
-            }
+
         }
 
         return result;
