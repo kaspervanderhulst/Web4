@@ -2,7 +2,6 @@ package controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonObject;
 import domain.Person;
 
 import javax.servlet.ServletException;
@@ -11,27 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class GetMessages extends RequestHandler {
-
+public class CountMessages extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Person sender = (Person) request.getSession().getAttribute("user");
-        String recipientid =  request.getParameter("recipient");
-        Person recipient = getPersonService().getPerson(recipientid);
+        String recipientId =  request.getParameter("recipient");
+        Person recipient = getPersonService().getPerson(recipientId);
 
-        String json = "";
-        json = getMessagesAsString(sender, recipient);
+        String text = getMessageCountAsString(sender, recipient);
 
-        response.setContentType("application/json");
-        response.getWriter().write(json);
+        response.setContentType("application/text");
+        response.getWriter().write(text);
     }
 
-    //get a Stringvalue of all the messages sent and received for the sender and receiver
-    public String getMessagesAsString(Person sender, Person recipient) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
+    //almost same method as in getMessages but here we take the size of the list
+    //to get the ammount of messages sent
+    public String getMessageCountAsString(Person sender, Person recipient) {
         List<String> x = getMessageService().getMessagesForUserString(sender.getUserId(), recipient.getUserId());
-        return mapper.writeValueAsString(x);
+        return String.valueOf(x.size());
     }
-
 }

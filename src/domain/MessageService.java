@@ -10,54 +10,28 @@ public class MessageService {
 
     private MessageRepository messageRepository = new MessageRepositoryStub();
 
-    public void addMessage(Person sender, Person recipient, String message){
-        Message m = new Message(message, recipient, sender);
-        messageRepository.addMessage(m);
-    }
-
-    public JsonObject getMessages(Person user){
-
-        JsonObject messages = getMessagesAsJson(getMessagesForUser(user.getUserId()),user);
-
-        return messages;
-    }
-
+    //adds a message to the repo with the sender, recipient and message itself
     public void addMessageService(Person sender, Person recipient, String message){
         Message m = new Message(message, recipient, sender);
         messageRepository.addMessage(m);
     }
 
+// Gets all the messages for given user, returns them in a list of messages
+    private List<Message> getMessagesForUser(String userId){
+        return this.messageRepository.chatMessagesSent(userId);
+    }
+
+    // Gets all the messages for given user, returns them in a list of strings
     public List<String> getMessagesForUserString(String userId, String recipId){
 
         return this.messageRepository.chatMessagesString(userId,recipId);
     }
 
-    public JsonObject getMessagesAsJson(List<Message> messages, Person user){
-        JsonObject object = new JsonObject();
-
-        int teller = 0;
-        for(Message message: messages){
-
-            JsonObject messageObject = new JsonObject();
-            messageObject.addProperty("message", message.getMessage());
-            messageObject.addProperty("recipientId", message.getRecipientId());
-            messageObject.addProperty("sender", message.getSender().getFirstName());
-            messageObject.addProperty("senderId",message.getSenderId());
-            object.add(String.valueOf(teller),messageObject);
-            teller+=1;
-        }
-        teller=0;
-        return object;
-    }
-
-    private List<Message> getMessagesForUser(String userId){
-
-        return this.messageRepository.chatMessagesSent(userId);
-    }
+    // Gets all the sent messages for given user, returns them in a list of strings
     public List<String> getMessageForUserSentString(String userid){
         return this.messageRepository.chatMessagesSentString(userid);
     }
-
+    // Gets all the received messages for given user, returns them in a list of strings
     public List<String> getMessageForUserReceivedString(String userid){
         return this.messageRepository.chatMessagesReceivedString(userid);
     }

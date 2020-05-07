@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Message extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-       Person person = (Person) request.getSession().getAttribute("user");
+       Person sender = (Person) request.getSession().getAttribute("user");
 
         String message = request.getParameter("message");
         String recipientId = request.getParameter("recipient");
@@ -24,17 +24,16 @@ public class Message extends RequestHandler {
         Person recipient = getPersonService().getPerson(recipientId);
         System.out.println("Message: " + message);
         System.out.println("Recipient: " + recipientId);
-        System.out.println("User: " + person.getUserId());
-        getMessageService().addMessageService(person, recipient, message);
+        System.out.println("Sender: " + sender.getUserId());
+        getMessageService().addMessageService(sender, recipient, message);
 
-//        JsonObject object = getMessageService().getMessages(person);
         response.setContentType("application/json");
-        json = test(person, recipient);
-        System.out.println(json + "in the messages");
+        json = getMessagesAsString(sender, recipient);
+        System.out.println(json + " in Message.java");
         response.getWriter().write(json);
     }
 
-    public String test(Person user, Person recipient) throws JsonProcessingException {
+    public String getMessagesAsString(Person user, Person recipient) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(getMessageService().getMessagesForUserString(user.getUserId(), recipient.getUserId()));
     }

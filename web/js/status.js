@@ -66,11 +66,19 @@ function showFriends() {
                 btn.type = "button";
                 btn.innerHTML = "Chat";
 
+                let btn2 = document.createElement("button");
+
+
+                btn2.setAttribute("onClick", "countMessages(" + (count) + ")");
+                btn2.id = "countbtn" + count;
+                btn2.type = "button";
+                btn2.innerHTML = "count messages";
 
                 tr.appendChild(tdNr);
                 tr.appendChild(tdName);
                 tr.appendChild(tdStatus);
                 tr.appendChild(btn);
+                tr.appendChild(btn2);
                 names[count -1] = text[person].name
                 tr.className = "friendlist";
                 table.appendChild(tr);
@@ -152,7 +160,7 @@ function writeResponse(text) {
 
 
 
-// ajax jquery
+// DEELOPDRACHT 3: AJAX
 
 
 $(document).ready(function () {
@@ -162,7 +170,7 @@ $(document).ready(function () {
     }, 300);
 });
 
-
+//generates chat window
 function genChatWindow(count) {
     let div = document.getElementById("chats");
 
@@ -216,6 +224,8 @@ function genChatWindow(count) {
         $("#sendbtn").click(function () {
             let msg = document.getElementById("msgID").value;
             let recip = ($("#recipient").html() + "@ucll.be").toLowerCase();
+
+
             console.log(recip)
             $.ajax({
                 type: "POST",
@@ -228,7 +238,9 @@ function genChatWindow(count) {
                     alert("Error bij post");
                 }
             });
+            document.getElementById("msgID").value = "";
         });
+
 
     });
 }
@@ -248,6 +260,28 @@ function openForm(count) {
     document.getElementById("form").style.display = "block";
 }
 
+
+//count the ammount of messages sent to a specific person
+//person is known via count
+function countMessages(count) {
+    let recip = (names[count-1] + "@ucll.be").toLowerCase();
+    console.log(names[count-1])
+    $.ajax({
+        type: "GET",
+        url: "Controller?action=CountMessages",
+        data: {recipient: recip },
+        dataType: "text",
+        success: function (text) {
+           console.log(text)
+            $("#messageCountNumber").innerText = text;
+           $("#messageCountPerson").innerText = names[count];
+           alert("you have sent " + text +  " messages to " + recip)
+
+        }
+    });
+}
+
+//gets all messages between youself and a specific person
 function getReceivedMessages() {
     let docu = document.getElementById("messages");
     let recip = ($("#recipient").html() + "@ucll.be").toLowerCase();

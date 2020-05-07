@@ -49,7 +49,7 @@
         <div id="chats">
 
         </div>
-    </div>
+    <div id="messageCount">you have sent <div id="messageCountNumber"></div> messages to <div id="messageCountPerson"></div></div>
 </main>
 <jsp:include page="footer.jsp">
     <jsp:param name="title" value="Home"/>
