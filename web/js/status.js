@@ -1,12 +1,7 @@
 let xhr = new XMLHttpRequest();
-//let friendsListRequest = new XMLHttpRequest();
-var timeoutId;
-var webSocket = new WebSocket("ws://localhost:8080/comment");
-//let commentRequest = new XMLHttpRequest();
+let timeoutId;
 let names = [];
-webSocket.onmessage = function (ev) {
-    writeResponse(ev.data);
-};
+
 
 //1. Setting a status
 function changeStatus() {
@@ -17,14 +12,14 @@ function changeStatus() {
 
 
 function setStatus() {
-    if (xhr.status == 200) {
-        if (xhr.readyState == 4) {
-            var serverResponse = JSON.parse(xhr.responseText);
-            var status = serverResponse.status;
-            var div = document.getElementById("status");
-            var p = document.getElementById("pStatus");
+    if (xhr.status === 200) {
+        if (xhr.readyState === 4) {
+            let serverResponse = JSON.parse(xhr.responseText);
+            let status = serverResponse.status;
+            let div = document.getElementById("status");
+            let p = document.getElementById("pStatus");
             p.innerHTML = "";
-            var text = document.createTextNode(status);
+            let text = document.createTextNode(status);
             p.appendChild(text);
             div.appendChild(p);
         }
@@ -34,7 +29,9 @@ function setStatus() {
 
 //2. Displaying friends
 
-getFriendlist();
+setTimeout(function () {
+    getFriendlist();
+},300);
 
 function getFriendlist() {
     xhr.open("GET", "Controller?action=GetFriends");
@@ -43,6 +40,7 @@ function getFriendlist() {
 }
 
 function showFriends() {
+
     if (xhr.status === 200) {
         if (xhr.readyState === 4) {
             clearTable();
@@ -84,7 +82,7 @@ function showFriends() {
                 table.appendChild(tr);
                 count++;
             }
-            timeoutId = setTimeout(getFriendlist, 20000);
+            timeoutId = setTimeout(getFriendlist, 2000);
         }
     }
 }
@@ -102,61 +100,11 @@ function addFriend() {
     clearTimeout(timeoutId);
     xhr.open("POST", "Controller?action=AddFriend&name=" + document.getElementById("nameInput").value);
     xhr.onreadystatechange = getFriendlist;
+
     xhr.send(null);
 }
 
-//3. Adding comments to topics
 
-let forms = document.getElementById("topics").getElementsByTagName("form");
-
-let j = 0;
-for (let i = 0; i < forms.length; i++) {
-    j++;
-    console.log(j);
-    forms[i].addEventListener('submit', ev => {
-        ev.preventDefault();
-        let name = document.getElementById("name" + forms[i].id).value;
-        console.log("name: " + name)
-        let comment = document.getElementById("comment" + forms[i].id).value;
-        let rating = document.getElementById("number" + forms[i].id).value;
-
-        let total = forms[i].id + "-" + name + ": " + comment + "     Rating: " + rating + "/10"
-        console.log("got here");
-        console.log(name);
-        console.log(comment);
-        console.log(rating);
-
-        xhr.open("POST", "/Controller?action=comment");
-        xhr.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
-        xhr.send('name=${name}&comment=${comment}&rating=${rating}');
-
-        document.getElementById("comment" + forms[i].id).value = '';
-        document.getElementById("number" + forms[i].id).value = '';
-
-        send(total);
-
-    });
-}
-
-function send(text) {
-    webSocket.send(text);
-}
-
-function closeSocket() {
-    webSocket.close();
-}
-
-function writeResponse(text) {
-    console.log(text);
-
-    if (text === "Connection Established") {
-
-    }
-    let split = text.split("-");
-    console.log(split);
-    document.getElementById("comments" + split[0]).innerHTML += "<br/>" + split[1];
-
-}
 
 
 
@@ -164,11 +112,15 @@ function writeResponse(text) {
 
 
 $(document).ready(function () {
-    getFriendlist();
+    setTimeout(function () {
+        getFriendlist();
+
+    },300);
     setTimeout(function () {
         genChatWindow();
     }, 300);
 });
+
 
 //generates chat window
 function genChatWindow(count) {
@@ -306,7 +258,7 @@ function getReceivedMessages() {
 
                 $('#messages').append(newmsg);
             }
-            setTimeout(getReceivedMessages, 5000);
+            setTimeout(getReceivedMessages, 1000);
         }
     });
 }

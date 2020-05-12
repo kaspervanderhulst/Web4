@@ -99,6 +99,6 @@
 <jsp:include page="footer.jsp">
     <jsp:param name="title" value="Home"/>
 </jsp:include>
-<script src="js/status.js"></script>
+<script src="js/comments.js"></script>
 </body>
 </html>
